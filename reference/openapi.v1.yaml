@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: openapi
+  version: '1.0'
+  contact:
+    name: Nathan Englert
+    url: 'https://nathanenglert.com'
+    email: nenglert@gmail.com
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  description: An API that manages Things
+servers:
+  - url: 'http://localhost:3000'
+    description: Local
+paths:
+  /things:
+    get:
+      summary: Gets some things
+      tags:
+        - Things
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of Things
+                items:
+                  $ref: '#/components/schemas/Thing'
+              examples:
+                Example:
+                  value:
+                    - _id: 1
+                      name: Thing 1
+      operationId: getThings
+      description: Gets some things
+    post:
+      summary: Creates a Thing
+      operationId: postThings
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thing'
+              examples:
+                Example:
+                  value:
+                    _id: 2
+                    name: Thing 2
+      description: Creates a Thing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Thing'
+            examples:
+              Example:
+                value:
+                  name: Thing 2
+        description: A Thing to be created
+      tags:
+        - Things
+components:
+  schemas:
+    Thing:
+      title: Thing
+      type: object
+      x-examples:
+        Example:
+          _id: 1
+          name: Thing 1
+      description: Represents a Thing
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+tags:
+  - name: Things
