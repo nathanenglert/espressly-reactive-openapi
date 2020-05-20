@@ -4,7 +4,7 @@ export default class ThingsService {
   }
 
   createThing(thing) {
-    thing._id = this.things.count;
+    thing._id = this.things.length + 1;
     this.things.push(thing);
 
     return Promise.resolve(thing);

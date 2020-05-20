@@ -1,39 +1,36 @@
-import React, { useReducer, useRef } from 'react';
-
-const initialState = {
-  name: '',
-  things: [{ _id: 1, name: 'Foo' }],
-};
-
-const [ADD_THING, UPDATE_NAME] = ['ADD_THING', 'UPDATE_NAME'];
-
-function ThingsReducer(state, action) {
-  switch (action.type) {
-    case ADD_THING:
-      return {
-        name: '',
-        things: [
-          ...state.things,
-          {
-            _id: action.id,
-            name: action.name,
-          },
-        ],
-      };
-    case UPDATE_NAME:
-      return {
-        ...state,
-        name: action.name,
-      };
-    default:
-      throw new Error();
-  }
-}
+import React, { useEffect, useState } from 'react';
+import ThingsAPI from './ThingsAPI';
 
 const Things = () => {
-  const [state, dispatch] = useReducer(ThingsReducer, initialState);
-  const { name, things } = state;
-  let nextId = useRef(things.length);
+  const [name, setName] = useState('');
+  const [things, setThings] = useState([]);
+
+  const createThing = async () => {
+    try {
+      const newThing = await ThingsAPI.createThing({
+        name,
+      });
+
+      setName('');
+      setThings([...things, newThing]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getThings = async () => {
+    try {
+      const things = await ThingsAPI.getThings();
+
+      setThings(things);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getThings();
+  }, []);
 
   return (
     <div>
@@ -46,15 +43,9 @@ const Things = () => {
           <input
             type="text"
             value={name}
-            onChange={({ target }) =>
-              dispatch({ type: UPDATE_NAME, name: target.value })
-            }
+            onChange={({ target }) => setName(target.value)}
           />
-          <button
-            onClick={() => dispatch({ type: ADD_THING, name, id: nextId++ })}
-          >
-            Add
-          </button>
+          <button onClick={() => createThing()}>Add</button>
         </li>
       </ul>
     </div>
