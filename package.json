@@ -14,6 +14,6 @@
   "scripts": {
     "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
     "setup": "concurrently \"cd server && yarn install\" \"cd client && yarn install\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "concurrently \"cd server && yarn test\" \"cd client && yarn test\""
   }
 }

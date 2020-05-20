@@ -42,6 +42,7 @@ const Things = () => {
         <li>
           <input
             type="text"
+            placeholder="Thing"
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
