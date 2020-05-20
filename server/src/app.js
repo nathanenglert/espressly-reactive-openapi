@@ -36,8 +36,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+//app.use(express.static(path.join(__dirname, '../public')));
 
+app.get('/', (req, res) => res.sendStatus(200));
 app.use((req, res) => api.handleRequest(req, req, res));
 
 export default app;

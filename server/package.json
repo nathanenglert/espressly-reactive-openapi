@@ -1,0 +1,70 @@
+{
+  "name": "expressly-reactive-openapi",
+  "version": "0.0.0",
+  "private": true,
+  "author": {
+    "name": "Nathan Englert",
+    "url": "https://nathanenglert"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/runtime": "^7.9.6",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "openapi-backend": "^3.4.2",
+    "rimraf": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "axios": "^0.19.2",
+    "jest": "^25.1.0",
+    "supertest": "^4.0.2"
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "server/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/transform-runtime"
+      ]
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/dist/"
+    ]
+  },
+  "scripts": {
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "client": "cd client && yarn start",
+    "server": "node ./dist/bin/www",
+    "dev": "NODE_ENV=development npm-run-all build server client",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rimraf dist",
+    "watch:dev": "nodemon",
+    "test": "jest"
+  }
+}

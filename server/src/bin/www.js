@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
- import app from '../app';
- import debugLib from 'debug';
- import http from 'http';
+import app from '../app';
+import debugLib from 'debug';
+import http from 'http';
 
 var debug = debugLib('myapp:server');
 
@@ -14,7 +14,7 @@ var debug = debugLib('myapp:server');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '9000');
 app.set('port', port);
 
 /**
@@ -60,9 +60,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -85,8 +83,6 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
