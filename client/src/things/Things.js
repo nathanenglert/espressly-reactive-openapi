@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { message, Button, Input, List, Row, Col } from 'antd';
+
 import ThingsAPI from './ThingsAPI';
 
 const Things = () => {
@@ -10,6 +12,8 @@ const Things = () => {
       const newThing = await ThingsAPI.createThing({
         name,
       });
+
+      message.success(`${name} added as a thing`);
 
       setName('');
       setThings([...things, newThing]);
@@ -33,23 +37,31 @@ const Things = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <h1>Things</h1>
-      <ul>
-        {things.map((thing) => (
-          <li key={thing._id}>{thing.name}</li>
-        ))}
-        <li>
-          <input
+      <List
+        bordered
+        dataSource={things}
+        renderItem={(thing) => <List.Item>{thing.name}</List.Item>}
+        style={{ marginBottom: '12px' }}
+      />
+      <Row>
+        <Col flex="auto">
+          <Input
             type="text"
-            placeholder="Thing"
+            placeholder="New thing"
+            style={{ paddingLeft: '24px' }}
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
-          <button onClick={() => createThing()}>Add</button>
-        </li>
-      </ul>
-    </div>
+        </Col>
+        <Col>
+          <Button type="primary" onClick={() => createThing()}>
+            Add
+          </Button>
+        </Col>
+      </Row>
+    </>
   );
 };
 

@@ -43,7 +43,7 @@ describe('<Things />', () => {
     const spy = jest.spyOn(ThingsAPI, 'createThing');
 
     const { getByText, getByPlaceholderText } = render(<Things />);
-    const input = getByPlaceholderText('Thing');
+    const input = getByPlaceholderText('New thing');
     const button = getByText('Add');
 
     fireEvent.change(input, { target: { value: expected } });
