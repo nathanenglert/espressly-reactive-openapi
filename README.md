@@ -8,7 +8,23 @@ An skeleton app for bootstrapping new applications quickly. It uses things like:
 - Antd
 - Jest
 
-## Building the server component
+## Getting Started
+
+### Prerequisites
+
+- Make sure you have [Node.js](http://nodejs.org/) installed, then clone this repository:
+
+```
+git clone https://github.com/nathanenglert/espressly-reactive-openapi.git
+```
+
+- Install the dependencies:
+
+```
+yarn setup
+```
+
+## Implementing the Server
 
 ### Designing the API
 
@@ -24,19 +40,15 @@ Following Express standards, the server component is setup within `server/src/ap
 
 For information on registering operations, take a look at [Registering Handlers for Operations](https://github.com/anttiviljami/openapi-backend#registering-handlers-for-operations).
 
-## Building the client component
+## Implementing the Client
 
 **WORK IN PROGRESS**
 
-## How to run
-
-Before anything else, you must have node installed on your machine.
-
-### Running Dev Server
+## Running Locally
 
 Running `yarn dev` will launch both the client and server components.
 
-## Built On
+## Built With
 
 This project was built using these great repositories:
 
