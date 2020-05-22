@@ -24,7 +24,7 @@ git clone https://github.com/nathanenglert/espressly-reactive-openapi.git
 yarn setup
 ```
 
-## Implementing the Server
+## Building the Server
 
 ### Designing the API
 
@@ -40,9 +40,9 @@ Following Express standards, the server component is setup within `server/src/ap
 
 For information on registering operations, take a look at [Registering Handlers for Operations](https://github.com/anttiviljami/openapi-backend#registering-handlers-for-operations).
 
-## Implementing the Client
+## Building the Client
 
-**WORK IN PROGRESS**
+The frontend of the template is built on React and Antd. You can find examples of the UI components within the `client/src` folder, along with accompanying tests written in Jest.
 
 ## Running Locally
 
